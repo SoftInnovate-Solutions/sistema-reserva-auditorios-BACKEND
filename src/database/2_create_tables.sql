@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     05/05/2024 0:13:44                           */
+/* Created on:     19/05/2024 20:48:35                          */
 /*==============================================================*/
 
 
@@ -859,4 +859,7 @@ alter table USUARIO
    add constraint FK_USUARIO_ES5_ADMINIST foreign key (ADM_COD_USUARIO)
       references ADMINISTRADOR (COD_USUARIO)
       on delete restrict on update restrict;
+
+
+
 
