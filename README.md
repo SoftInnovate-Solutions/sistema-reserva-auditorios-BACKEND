@@ -51,3 +51,4 @@ Cabe recalcar que la matriz solo tiene que ser de ``10 x 7`` y sus valores tiene
 * ruta: ``http://127.0.0.1:5000/ajuste_ambiente/deleteAll``, eliminara todos los registros de nuestra tabla ajuste_ambiente.
 * ruta: ``http://127.0.0.1:5000/final/iniciar_sesion``, permite iniciar sesion al usuario final, cabe recalcar que se tiene que enviar el nombre de usuario, la contrasenia, el codigo sis y el codigo de tipo final todo esto en un json.
 * ruta: ``http://127.0.0.1:5000/administrador/iniciar_sesion``, permite iniciar sesion al usuario administrador, cabe recalcar que se tiene que enviar el nombre de usuario, la contrasenia y el alias todo esto en un json.
+* ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_general``, permite obtener el codigo del periodo y las fechas generales como inicio y fin en caso contrario de que no exista un periodo devuelve una json vacio
