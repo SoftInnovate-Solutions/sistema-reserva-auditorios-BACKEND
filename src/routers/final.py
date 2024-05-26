@@ -9,8 +9,7 @@ def iniciar_sesion():
         nombre_usu = request.json['nombre_usu']
         contrasenia_usu = request.json['contrasenia_usu']
         codigo_sis = request.json['codigo_sis_fin']
-        cod_tipo_final = request.json['cod_tipo_final']
-        usuario_final = FinalModel.iniciar_sesion(nombre_usu,contrasenia_usu,codigo_sis,cod_tipo_final)
+        usuario_final = FinalModel.iniciar_sesion(nombre_usu,contrasenia_usu,codigo_sis)
         return jsonify(usuario_final)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
