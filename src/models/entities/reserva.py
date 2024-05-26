@@ -19,5 +19,17 @@ class Reserva():
             'fecha_res' : self.fecha_res,
             'hora' : self.cod_bloque
         }
+    
+    def to_JSONONE(self, numero_estudiantes):
+        return {
+            'cod_reserva' : self.cod_reserva,
+            'ambiente' : self.cod_ambiente,
+            'materia' : self.cod_materia,
+            'grupo' : self.cod_grupo,
+            'fecha_res' : self.fecha_res,
+            'hora' : self.cod_bloque,
+            'instructor' : self.cod_usuario,
+            'numero_estudiantes' : numero_estudiantes
+        }
 
-            
+

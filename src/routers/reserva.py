@@ -22,3 +22,11 @@ def delete_reserva(id):
         return jsonify({'message': "Ambiente no eliminado"}), 404
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+
+@main.route('/one/<id>')
+def get_reserva(id):
+    try:
+        reserva = ReservaModel.get_reserva(id)
+        return jsonify(reserva)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
