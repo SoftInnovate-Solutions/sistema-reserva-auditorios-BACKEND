@@ -78,6 +78,6 @@ Cabe recalcar que la matriz solo tiene que ser de ``10 x 7`` y sus valores tiene
 * ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_docente``, se obtiene un parametro para indicar si el docente podra realizar una reserva
 * ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_auxiliar``, se obtiene un parametro para indicar si el auxiliar realizar una reserva
 
-
+* ruta: ``http://127.0.0.1:5000/reserva/all/id_usuario``, se obtiene todas las reservas del usuario
 
 
