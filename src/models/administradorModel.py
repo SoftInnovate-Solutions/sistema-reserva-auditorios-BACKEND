@@ -5,7 +5,7 @@ from utils.transformacion import Transformacion
 class AdministradorModel():
 
     @classmethod
-    def iniciar_sesion(self, nombre, contrasenia, alias):
+    def iniciar_sesion(self, nombre, contrasenia):
         try:
             connection = get_connection()
             cifrado = Transformacion.transformarSHA512(contrasenia)
@@ -20,8 +20,8 @@ class AdministradorModel():
                     cursor.execute('''
                                SELECT cod_usuario
                                FROM administrador
-                               WHERE cod_usuario = %s AND alias_adm = %s;
-                        ''',(result[0],alias))
+                               WHERE cod_usuario = %s;
+                        ''',(result[0],))
                     result = cursor.fetchone()
                     if result is not None:
                         connection.close()

@@ -8,8 +8,7 @@ def iniciar_sesion():
     try:
         nombre_usu = request.json['nombre_usu']
         contrasenia_usu = request.json['contrasenia_usu']
-        alias_adm = request.json['alias_adm']
-        usuario_final = AdministradorModel.iniciar_sesion(nombre_usu,contrasenia_usu,alias_adm)
+        usuario_final = AdministradorModel.iniciar_sesion(nombre_usu,contrasenia_usu)
         return jsonify(usuario_final)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500

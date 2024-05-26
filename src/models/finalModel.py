@@ -6,7 +6,7 @@ from utils.transformacion import Transformacion
 class FinalModel():
 
     @classmethod
-    def iniciar_sesion(self, nombre, contrasenia, codigo_sis, cod_tipo_final):
+    def iniciar_sesion(self, nombre, contrasenia, codigo_sis):
         try:
             connection = get_connection()
             cifrado = Transformacion.transformarSHA512(contrasenia)
@@ -21,8 +21,8 @@ class FinalModel():
                     cursor.execute('''
                                SELECT cod_usuario
                                FROM final
-                               WHERE cod_usuario = %s AND codigo_sis_fin = %s AND cod_tipo_final = %s;
-                        ''',(result[0],codigo_sis,cod_tipo_final))
+                               WHERE cod_usuario = %s AND codigo_sis_fin = %s;
+                        ''',(result[0],codigo_sis))
                     result = cursor.fetchone()
                     if result is not None:
                         connection.close()
