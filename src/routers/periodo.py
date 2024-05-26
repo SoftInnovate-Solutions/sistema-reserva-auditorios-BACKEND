@@ -58,6 +58,22 @@ def get_periodo_general():
         return jsonify(periodo)
     except Exception as ex:
         return jsonify({'message':str(ex)}),500
+
+@main.route('/periodo_docente')
+def get_periodo_docente():
+    try:
+        periodo = PeriodoModel.get_periodo_docente()
+        return jsonify(periodo)
+    except Exception as ex:
+        return jsonify({'message':str(ex)}),500
+    
+@main.route('/periodo_auxiliar')
+def get_periodo_auxiliar():
+    try:
+        periodo = PeriodoModel.get_periodo_auxiliar()
+        return jsonify(periodo)
+    except Exception as ex:
+        return jsonify({'message':str(ex)}),500
     
 @main.route('/delete/<id>', methods=['DELETE'])
 def delete_periodo(id):

@@ -110,12 +110,31 @@ class PeriodoModel():
                 cursor.execute('''
                     SELECT COUNT(cod_periodo_reserva)
                     FROM periodo_reserva
-                    WHERE estado_visualizacion_per = TRUE AND 1 = 1 AND CURRENT_DATE BETWEEN fecha_inicio_docente_per AND fecha_fin_docente_per
+                    WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_docente_per AND fecha_fin_docente_per
                     LIMIT 1;
                 ''')
                 result = cursor.fetchone()
             if result is not None:
-                return Periodo_Reserva(cod_periodo_reserva = result[0],fecha_inicio_general_per = result[1],fecha_fin_general_per = result[2]).to_JSONGENERAL()
+                return {'existe' : result[0]}
+            connection.close()
+            return {}
+        except Exception as ex:
+            raise Exception(ex)
+    
+    @classmethod
+    def get_periodo_auxiliar(self):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    SELECT COUNT(cod_periodo_reserva)
+                    FROM periodo_reserva
+                    WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_auxiliar_per AND fecha_fin_auxiliar_per
+                    LIMIT 1;
+                ''')
+                result = cursor.fetchone()
+            if result is not None:
+                return {'existe' : result[0]}
             connection.close()
             return {}
         except Exception as ex:
