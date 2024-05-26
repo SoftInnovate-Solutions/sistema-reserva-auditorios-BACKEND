@@ -30,3 +30,11 @@ def get_reserva(id):
         return jsonify(reserva)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+
+@main.route('/imparticiones/<id>')
+def get_imparticiones(id):
+    try:
+        reservas = ReservaModel.get_imparticiones(id)
+        return jsonify(reservas)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
