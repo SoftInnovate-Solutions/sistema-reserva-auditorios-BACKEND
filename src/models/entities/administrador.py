@@ -15,4 +15,5 @@ class Administrador(Usuario):
     def to_JSONVALIDO(self):
         return{
             "cod_usuario" : self.cod_usuario,
+            "nombre_usu" : str(self.nombre_usu).strip()
         }
