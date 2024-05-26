@@ -75,8 +75,8 @@ Cabe recalcar que la matriz solo tiene que ser de ``10 x 7`` y sus valores tiene
   "notificacion_per": "2024-05-12 08:30:00"
 }
 * ruta: ``http://127.0.0.1:5000/periodo_reserva/delete/1``, permite eliminar el periodo unico mediante su cod_periodo
-* ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_docente``, se obtiene un parametro para indicar si el docente podra realizar una reserva
-* ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_auxiliar``, se obtiene un parametro para indicar si el auxiliar realizar una reserva
+* ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_docente``, se obtiene un parametro para indicar si el docente podra realizar una reserva y tambien se obtiene las fechas de tal periodo
+* ruta: ``http://127.0.0.1:5000/periodo_reserva/periodo_auxiliar``, se obtiene un parametro para indicar si el auxiliar realizar una reserva y tambien se obtiene las fechas de tal periodo
 
 * ruta: ``http://127.0.0.1:5000/reserva/all/id_usuario``, se obtiene todas las reservas del usuario
 * ruta: ``http://127.0.0.1:5000/reserva/delete/id_reserva``, elimina la reserva seleccionada

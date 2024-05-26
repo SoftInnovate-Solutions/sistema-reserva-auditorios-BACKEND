@@ -108,7 +108,7 @@ class PeriodoModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    SELECT COUNT(cod_periodo_reserva)
+                    SELECT COUNT(cod_periodo_reserva), fecha_inicio_docente_per, fecha_fin_docente_per
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_docente_per AND fecha_fin_docente_per
                     LIMIT 1;
@@ -127,7 +127,7 @@ class PeriodoModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    SELECT COUNT(cod_periodo_reserva)
+                    SELECT COUNT(cod_periodo_reserva), fecha_inicio_auxiliar_per, fecha_fin_auxiliar_per
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_auxiliar_per AND fecha_fin_auxiliar_per
                     LIMIT 1;

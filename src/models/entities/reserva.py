@@ -23,12 +23,12 @@ class Reserva():
     def to_JSONONE(self, numero_estudiantes):
         return {
             'cod_reserva' : self.cod_reserva,
-            'ambiente' : self.cod_ambiente,
-            'materia' : self.cod_materia,
-            'grupo' : self.cod_grupo,
+            'ambiente' : str(self.cod_ambiente).split(),
+            'materia' : str(self.cod_materia).split(),
+            'grupo' : str(self.cod_grupo).split(),
             'fecha_res' : self.fecha_res,
-            'hora' : self.cod_bloque,
-            'instructor' : self.cod_usuario,
+            'hora' : str(self.cod_bloque).split(),
+            'instructor' : str(self.cod_usuario).split(),
             'numero_estudiantes' : numero_estudiantes
         }
 
