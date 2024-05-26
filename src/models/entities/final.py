@@ -18,6 +18,6 @@ class Final(Usuario):
     def to_JSONVALIDO(self):
         return{
             "cod_usuario" : self.cod_usuario,
-            "codigo_sis_fin" : str(self.codigo_sis_fin).strip(),
-            "cod_tipo_final" : self.cod_tipo_final
+            "nombre_usu" : str(self.cod_usuario).split(),
+            "codigo_sis_fin" : str(self.codigo_sis_fin).strip()
         }
