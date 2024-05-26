@@ -127,5 +127,37 @@ VALUES
   (20,1, '2569835'),
   (21,1, '2589735');
 
+INSERT INTO grupo (nombre_gru)
+VALUES 
+('G1'),
+('G2'),
+('G3'),
+('G4'),
+('G5'),
+('G6'),
+('G7'),
+('G8'),
+('G9'),
+('G10');
 
+INSERT INTO materia (nombre_mat)
+VALUES
+('INTRO A LA PROGRAMACION'),
+('ELEMENTOS'),
+('BASE DE DATOS'),
+('TALLER DE INGENIERIA DE SOFTWARE'),
+('INTELIGENCIA ARTIFICIAL'),
+('CALCULO 2'),
+('REDES'),
+('ALGEBRA 1'),
+('FISICA GENERAL');
   
+INSERT INTO imparticion (cod_usuario, cod_materia, cod_grupo, cantidad_estudiantes_imp)
+VALUES
+(2,1,1,120),
+(2,2,1,100),
+(6,1,2,120),
+(3,3,1,60),
+(13,5,1,40),
+(15,1,1,120),
+(16,2,1,100);

@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     19/05/2024 20:48:35                          */
+/* Created on:     26/05/2024 11:11:22                          */
 /*==============================================================*/
 
 
@@ -456,7 +456,7 @@ COD_USUARIO
 /*==============================================================*/
 create table MATERIA (
    COD_MATERIA          SERIAL               not null,
-   NOMBRE_MAT           CHAR(30)             not null,
+   NOMBRE_MAT           CHAR(90)             not null,
    constraint PK_MATERIA primary key (COD_MATERIA)
 );
 
@@ -859,7 +859,6 @@ alter table USUARIO
    add constraint FK_USUARIO_ES5_ADMINIST foreign key (ADM_COD_USUARIO)
       references ADMINISTRADOR (COD_USUARIO)
       on delete restrict on update restrict;
-
 
 
 
