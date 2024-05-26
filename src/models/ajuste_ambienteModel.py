@@ -39,3 +39,37 @@ class Ajuste_ambienteModel():
         except Exception as ex:
             raise Exception(ex)
 
+    @classmethod
+    def get_ajuste_ambiente(self,id):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+
+                cursor.execute('''
+                                SELECT COUNT(DISTINCT(cod_ambiente))
+                                FROM ajuste_ambiente 
+                                WHERE cod_ambiente = %s;
+                                ''',(id,))
+                row = cursor.fetchone()
+                if row[0] == 1:
+                    cursor.execute('''
+                                    SELECT DISTINCT(cod_dia)
+                                    FROM ajuste_ambiente
+                                    WHERE cod_ambiente = %s
+                                    ORDER BY cod_dia;
+                                    ''',(id,))
+                    dias = cursor.fetchall()
+                    cursor.execute('''
+                                    SELECT DISTINCT(cod_dia), cod_bloque 
+                                    FROM ajuste_ambiente 
+                                    WHERE cod_ambiente = %s
+                                    ORDER BY cod_dia, cod_bloque;
+                                    ''',(id,))
+
+                    bloques = cursor.fetchall()
+                    connection.close()
+                    return {'configuracion' : Generador.generar_configuracion(dias,bloques)}
+                return {'configuracion' : []}
+        except Exception as ex:
+            raise Exception(ex)
+

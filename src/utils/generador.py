@@ -56,6 +56,35 @@ class Generador():
                     fecha_inicio += timedelta(days=1)
                 fecha_inicio = datetime.strptime(desde, '%Y-%m-%d')
         return ajustes
+    
+    def generar_configuracion(dias, bloques):
+        dias = [d[0] for d in dias]
+        bloques = [b for b in bloques]
+        bloquesRefinados = {}
+        for dia in dias:
+            if dia not in bloquesRefinados:
+                bloquesRefinados[dia] = []
+
+        for a, b in bloques:
+            bloquesRefinados[a].append(b)
+
+        configuracion_transpuesta = []
+
+        for dia in range(1,8):
+            parametro = []
+            if dia in bloquesRefinados:
+                lista = bloquesRefinados[dia]
+                for bloque in range(1,11):
+                    parametro.append(1 if bloque in lista else 0)
+            else:
+                parametro = [0]*10
+            configuracion_transpuesta.append(parametro)
+
+        configuracion = [[fila[i] for fila in configuracion_transpuesta] for i in range(len(configuracion_transpuesta[0]))]
+
+        return configuracion
+
+
 
         
             

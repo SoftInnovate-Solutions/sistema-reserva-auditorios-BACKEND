@@ -29,3 +29,10 @@ def delete_ajuste_ambiente_all():
             return jsonify({'message': "Ajustes no eliminados"}), 404
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+    
+@main.route('/get_ajuste_ambiente/<id>')
+def get_one_setting(id):
+    try:
+        return jsonify(Ajuste_ambienteModel.get_ajuste_ambiente(id))
+    except Exception as ex:
+        return jsonify({'message':str(ex)}),500
