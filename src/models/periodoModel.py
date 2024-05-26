@@ -35,33 +35,7 @@ class PeriodoModel():
         except Exception as ex:
             raise Exception(ex)
 
-    @classmethod
-    def delete_periodo(self,periodo):
-        try:
-            connection = get_connection()
-            with connection.cursor() as cursor:
-                cursor.execute('DELETE FROM periodo WHERE cod_periodo = %s',(periodo.cod_periodo))
-                affected_rows_periodo = cursor.rowcount
-                cursor.execute('DELETE FROM detalle_periodo WHERE cod_periodo = %s',(periodo.cod_periodo))
-                affected_rows_detalle_periodo = cursor.rowcount
-                connection.commit()
-            connection.close()
-            return affected_rows_periodo + affected_rows_detalle_periodo
-        except Exception as ex:
-            raise Exception(ex)
 
-    @classmethod
-    def update_periodo(self,periodo):
-        try:
-            connection = get_connection()
-            with connection.cursor() as cursor:
-                cursor.execute('UPDATE periodo SET fecha_inicio_per = %s, fecha_fin_per = %s WHERE cod_periodo = %s', (periodo.fecha_inicio_per,periodo.fecha_fin_per,periodo.cod_periodo))
-                affected_rows = cursor.rowcount
-                connection.commit()
-            connection.close()
-            return affected_rows
-        except Exception as ex:
-            raise Exception(ex)
 
 
 
@@ -118,6 +92,25 @@ class PeriodoModel():
                     SELECT cod_periodo_reserva, fecha_inicio_general_per, fecha_fin_general_per
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE
+                    LIMIT 1;
+                ''')
+                result = cursor.fetchone()
+            if result is not None:
+                return Periodo_Reserva(cod_periodo_reserva = result[0],fecha_inicio_general_per = result[1],fecha_fin_general_per = result[2]).to_JSONGENERAL()
+            connection.close()
+            return {}
+        except Exception as ex:
+            raise Exception(ex)
+    
+    @classmethod
+    def get_periodo_docente(self):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    SELECT COUNT(cod_periodo_reserva)
+                    FROM periodo_reserva
+                    WHERE estado_visualizacion_per = TRUE AND 1 = 1 AND CURRENT_DATE BETWEEN fecha_inicio_docente_per AND fecha_fin_docente_per
                     LIMIT 1;
                 ''')
                 result = cursor.fetchone()
