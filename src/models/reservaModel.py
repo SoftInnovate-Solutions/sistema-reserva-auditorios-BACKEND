@@ -82,7 +82,7 @@ class ReservaModel():
                 FROM imparticion AS i
                 JOIN materia AS m ON i.cod_materia = m.cod_materia
                 JOIN grupo AS g ON i.cod_grupo = g.cod_grupo
-                WHERE cod_usuario = 2;
+                WHERE cod_usuario = %s;
                                 ''',(id,))
                 rows = cursor.fetchall()
             connection.close()
@@ -95,3 +95,34 @@ class ReservaModel():
             
         except Exception as ex:
             raise Exception(ex)
+        
+    @classmethod    
+    def get_ambientes_disponibles(self,cantidad):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                SELECT DISTINCT ON (aa.cod_ambiente) 
+                aa.cod_ambiente,aa.cod_dia,aa.cod_bloque,aa.fecha_aa,a.nombre_amb
+                FROM ajuste_ambiente AS aa
+                JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
+                WHERE 
+                %s BETWEEN  a.capacidad_amb - a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
+                AND a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_max_amb::DOUBLE PRECISION / 100)
+                EXCEPT
+                SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
+                FROM reserva;
+                                ''',(cantidad,))
+                rows = cursor.fetchall()
+            connection.close()
+            if rows is not None:
+                ambientes = []
+                for row in rows:
+                    ambientes.append(Reserva(cod_ambiente=row[0]).to_JSONAMBIENTESDISPONIBLES(row[4]))
+                return ambientes
+            return {}
+            
+        except Exception as ex:
+            raise Exception(ex)
+
+    

@@ -39,5 +39,11 @@ class Reserva():
             'cod_grupo': self.cod_grupo,
             'cod_materia': self.cod_materia
         }
+    
+    def to_JSONAMBIENTESDISPONIBLES(self,nombre_ambiente):
+        return{
+            'cod_ambiente' : self.cod_ambiente,
+            'nombre_amb' : str(nombre_ambiente).strip()
+        }
 
 

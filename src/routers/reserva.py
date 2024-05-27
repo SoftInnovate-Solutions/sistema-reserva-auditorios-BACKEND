@@ -38,3 +38,11 @@ def get_imparticiones(id):
         return jsonify(reservas)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+
+@main.route('/ambientes_disponibles/<cantidad>')
+def ambientes_disponibles(cantidad):
+    try:
+        reservas = ReservaModel.get_ambientes_disponibles(cantidad)
+        return jsonify(reservas)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
