@@ -34,15 +34,23 @@ def get_reserva(id):
 @main.route('/imparticiones/<id>')
 def get_imparticiones(id):
     try:
-        reservas = ReservaModel.get_imparticiones(id)
-        return jsonify(reservas)
+        imparticiones = ReservaModel.get_imparticiones(id)
+        return jsonify(imparticiones)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
 
 @main.route('/ambientes_disponibles/<cantidad>')
 def ambientes_disponibles(cantidad):
     try:
-        reservas = ReservaModel.get_ambientes_disponibles(cantidad)
-        return jsonify(reservas)
+        ambientes = ReservaModel.get_ambientes_disponibles(cantidad)
+        return jsonify(ambientes)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
+
+@main.route('/get_calendario/<id>')
+def get_calendario(id):
+    try:
+        fechas = ReservaModel.get_calendario(id)
+        return jsonify(fechas)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500

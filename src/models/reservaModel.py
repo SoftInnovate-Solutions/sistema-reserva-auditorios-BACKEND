@@ -125,4 +125,33 @@ class ReservaModel():
         except Exception as ex:
             raise Exception(ex)
 
-    
+    @classmethod    
+    def get_calendario(self,id):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                                SELECT cod_ambiente, cod_dia, cod_bloque, fecha_aa, nombre_amb
+                                FROM (
+                                SELECT DISTINCT ON (aa.fecha_aa) 
+                                aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, a.nombre_amb
+                                FROM ajuste_ambiente AS aa
+                                JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
+                                WHERE aa.cod_ambiente = %s
+                                EXCEPT
+                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, '' 
+                                FROM reserva AS r
+                                ) AS subconsulta_externa
+                                ORDER BY fecha_aa;
+                                ''',(id,))
+                rows = cursor.fetchall()
+            connection.close()
+            if rows is not None:
+                ambientes = []
+                for row in rows:
+                    ambientes.append(Reserva(fecha_res=row[3]).to_JSONCALENDARIO())
+                return ambientes
+            return {}
+            
+        except Exception as ex:
+            raise Exception(ex)    
