@@ -13,22 +13,22 @@ class Reserva():
     def to_JSONALL(self):
         return {
             'cod_reserva' : self.cod_reserva,
-            'ambiente' : self.cod_ambiente,
-            'materia' : self.cod_materia,
-            'grupo' : self.cod_grupo,
-            'fecha_res' : self.fecha_res,
+            'ambiente' : str(self.cod_ambiente).strip(),
+            'materia' : str(self.cod_materia).strip(),
+            'grupo' : str(self.cod_grupo).strip(),
+            'fecha_res' : self.fecha_res.strftime("%Y-%m-%d"),
             'hora' : self.cod_bloque
         }
     
     def to_JSONONE(self, numero_estudiantes):
         return {
             'cod_reserva' : self.cod_reserva,
-            'ambiente' : str(self.cod_ambiente).split(),
-            'materia' : str(self.cod_materia).split(),
-            'grupo' : str(self.cod_grupo).split(),
-            'fecha_res' : self.fecha_res,
-            'hora' : str(self.cod_bloque).split(),
-            'instructor' : str(self.cod_usuario).split(),
+            'ambiente' : str(self.cod_ambiente).strip(),
+            'materia' : str(self.cod_materia).strip(),
+            'grupo' : str(self.cod_grupo).strip(),
+            'fecha_res' : self.fecha_res.strftime("%Y-%m-%d"),
+            'hora' : str(self.cod_bloque).strip(),
+            'instructor' : str(self.cod_usuario).strip(),
             'numero_estudiantes' : numero_estudiantes
         }
     

@@ -60,13 +60,13 @@ class ReservaModel():
                     cursor.execute('''
                                 SELECT cantidad_estudiantes_imp
                                 FROM imparticion
-                                WHERE cod_usuario = %s AND cod_materia = %s AND cod_grupo = %s;
+                                WHERE cod_grupo = %s AND cod_materia = %s AND cod_materia = %s;
                                 ''',(row[7],row[8],row[9]))
                     cantidad = cursor.fetchone()
 
             connection.close()
             if row is not None:
-                return Reserva(cod_reserva=row[0],cod_ambiente=row[1],cod_materia=row[2],cod_grupo=row[3],fecha_res=row[4],cod_bloque=row[5],cod_usuario=row[6]).to_JSONONE(cantidad)
+                return Reserva(cod_reserva=row[0],cod_ambiente=row[1],cod_materia=row[2],cod_grupo=row[3],fecha_res=row[4],cod_bloque=row[5],cod_usuario=row[6]).to_JSONONE(cantidad[0])
             return {}
             
         except Exception as ex:
@@ -107,7 +107,7 @@ class ReservaModel():
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE 
-                %s BETWEEN  a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
+                %s BETWEEN a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
                 AND a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_max_amb::DOUBLE PRECISION / 100)
                 EXCEPT
                 SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
@@ -162,17 +162,17 @@ class ReservaModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                                SELECT cod_dia, cod_bloque, nombre_blo
-                                FROM (
-                                SELECT aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, b.nombre_blo
-                                FROM ajuste_ambiente AS aa
-                                JOIN bloque AS b ON b.cod_bloque = aa.cod_bloque
-                                WHERE aa.cod_ambiente = %s AND aa.fecha_aa = %s
-                                EXCEPT
-                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, '' 
-                                FROM reserva AS r
-                                ) AS subconsulta_externa
-                                ORDER BY nombre_blo;
+                SELECT cod_dia, cod_bloque,  CONCAT(nombre_blo,': ', hora_inicio_blo,' - ',hora_fin_blo) AS nombre
+                FROM (
+                SELECT aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, b.nombre_blo, b.hora_inicio_blo,b.hora_fin_blo
+                FROM ajuste_ambiente AS aa
+                JOIN bloque AS b ON b.cod_bloque = aa.cod_bloque
+                WHERE aa.cod_ambiente = %s AND aa.fecha_aa = %s
+                EXCEPT
+                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res,'', '00:00','00:00'
+                FROM reserva AS r
+                ) AS subconsulta_externa
+                ORDER BY nombre_blo;
                                 ''',(cod_ambiente, fecha_aa))
                 rows = cursor.fetchall()
             connection.close()
