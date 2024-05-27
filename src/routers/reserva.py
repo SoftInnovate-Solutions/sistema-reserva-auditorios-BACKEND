@@ -63,3 +63,17 @@ def get_bloque():
         return jsonify(ReservaModel.get_bloque(cod_ambiente,fecha_aa))
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+    
+@main.route('/add_reserva', methods=['POST'])
+def add_reserva():
+    try:
+        cod_usuario = request.json['cod_usuario']
+        cod_grupo = request.json['cod_grupo']
+        cod_materia = request.json['cod_materia']
+        cod_ambiente = request.json['cod_ambiente']
+        cod_dia = request.json['cod_dia']
+        cod_bloque = request.json['cod_bloque']
+        fecha_res = request.json['fecha_res']
+        return jsonify(ReservaModel.add_reserva(cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res))
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
