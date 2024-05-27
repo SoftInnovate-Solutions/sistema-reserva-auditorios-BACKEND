@@ -86,6 +86,15 @@ Cabe recalcar que la matriz solo tiene que ser de ``10 x 7`` y sus valores tiene
 * ruta: ``http://127.0.0.1:5000/reserva/get_calendario/id_ambiente``, obtenemos las fechas para el calendario
 * ruta: ``http://127.0.0.1:5000/reserva/get_calendario``, con un json que contenga el cod_ambiente y la fecha extraida se obtiene los cod_dia, los cod_bloque y sus correspondientes nombres
 * ruta: ``http://127.0.0.1:5000/reserva/add_reserva``, con un json que contenga el siguiente formato se registrara una nueva reserva
+{
+  "cod_usuario": 2,
+  "cod_grupo": 1,
+  "cod_materia": 2,
+  "cod_ambiente": 10,
+  "cod_dia": 1,
+  "cod_bloque": 3,
+  "fecha_res": "2024-07-01"
+}
 
 
 
