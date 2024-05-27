@@ -107,7 +107,7 @@ class ReservaModel():
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE 
-                %s BETWEEN  a.capacidad_amb - a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
+                %s BETWEEN  a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
                 AND a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_max_amb::DOUBLE PRECISION / 100)
                 EXCEPT
                 SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
