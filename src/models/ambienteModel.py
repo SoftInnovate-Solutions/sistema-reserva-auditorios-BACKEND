@@ -60,7 +60,7 @@ class AmbienteModel():
                 cursor.execute('''
                     INSERT INTO ambiente (nombre_amb,capacidad_amb,ubicacion_amb,descripcion_amb,albergacion_max_amb,albergacion_min_amb,cod_estado_ambiente,cod_piso,
                     cod_edificacion,cod_facultad,cod_tipo_ambiente) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', (
-                    ambiente.nombre_amb, ambiente.capacidad_amb, ambiente.ubicacion_amb, ambiente.descripcion_amb, 0, 0,
+                    ambiente.nombre_amb, ambiente.capacidad_amb, ambiente.ubicacion_amb, ambiente.descripcion_amb, 110, 90,
                     int(ambiente.cod_estado_ambiente), int(ambiente.cod_piso), int(ambiente.cod_edificacion), int(ambiente.cod_facultad),
                     int(ambiente.cod_tipo_ambiente)
                 ))

@@ -47,11 +47,16 @@ class Reserva():
         }
     
     def to_JSONCALENDARIO(self):
-    # Formatear la fecha en el formato deseado "YYYY-MM-DD"
         fecha_formateada = self.fecha_res.strftime("%Y-%m-%d")
-    # Devolver la fecha formateada como un diccionario JSON
         return {
             'fecha': fecha_formateada
+        }
+    
+    def to_JSONDIABLOQUE(self,nombre_blo):
+        return {
+            'cod_bloque': self.cod_bloque,
+            'nombre_blo': nombre_blo,
+            'cod_dia': self.cod_dia
         }
 
 

@@ -147,10 +147,40 @@ class ReservaModel():
                 rows = cursor.fetchall()
             connection.close()
             if rows is not None:
-                ambientes = []
+                fechas = []
                 for row in rows:
-                    ambientes.append(Reserva(fecha_res=row[3]).to_JSONCALENDARIO())
-                return ambientes
+                    fechas.append(Reserva(fecha_res=row[3]).to_JSONCALENDARIO())
+                return fechas
+            return {}
+            
+        except Exception as ex:
+            raise Exception(ex)    
+
+    @classmethod    
+    def get_bloque(self,cod_ambiente, fecha_aa):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                                SELECT cod_dia, cod_bloque, nombre_blo
+                                FROM (
+                                SELECT aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, b.nombre_blo
+                                FROM ajuste_ambiente AS aa
+                                JOIN bloque AS b ON b.cod_bloque = aa.cod_bloque
+                                WHERE aa.cod_ambiente = %s AND aa.fecha_aa = %s
+                                EXCEPT
+                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, '' 
+                                FROM reserva AS r
+                                ) AS subconsulta_externa
+                                ORDER BY nombre_blo;
+                                ''',(cod_ambiente, fecha_aa))
+                rows = cursor.fetchall()
+            connection.close()
+            if rows is not None:
+                conjuntos = []
+                for row in rows:
+                    conjuntos.append(Reserva(cod_dia=row[0],cod_bloque=row[1]).to_JSONDIABLOQUE(nombre_blo=row[2]))
+                return conjuntos
             return {}
             
         except Exception as ex:
