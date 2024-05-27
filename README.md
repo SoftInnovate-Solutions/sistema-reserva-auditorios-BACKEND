@@ -84,6 +84,7 @@ Cabe recalcar que la matriz solo tiene que ser de ``10 x 7`` y sus valores tiene
 * ruta: ``http://127.0.0.1:5000/reserva/imparticiones/id_usuario``, obtienes todas las imparticiones del usuario final ya sea docente o auxiliar
 * ruta: ``http://127.0.0.1:5000/reserva/ambientes_disponibles/cantidad``, obtenemos el cod_ambiente y el nombre del ambiente
 * ruta: ``http://127.0.0.1:5000/reserva/get_calendario/id_ambiente``, obtenemos las fechas para el calendario
+* ruta: ``http://127.0.0.1:5000/reserva/get_calendario``, con un json que contenga el cod_ambiente y la fecha extraida se obtiene los cod_dia, los cod_bloque y sus correspondientes nombres
 
 
 

@@ -54,3 +54,12 @@ def get_calendario(id):
         return jsonify(fechas)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+    
+@main.route('/get_bloque', methods=['POST'])
+def get_bloque():
+    try:
+        cod_ambiente = request.json['cod_ambiente']
+        fecha_aa = request.json['fecha_aa']
+        return jsonify(ReservaModel.get_bloque(cod_ambiente,fecha_aa))
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
