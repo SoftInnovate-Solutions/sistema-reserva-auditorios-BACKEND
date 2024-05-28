@@ -39,6 +39,7 @@ class Ambiente():
         return{
             'cod_ambiente' : self.cod_ambiente,
             'albergacion_max_amb' : self.albergacion_max_amb,
-            'albergacion_min_amb' : self.albergacion_min_amb
+            'albergacion_min_amb' : self.albergacion_min_amb,
+            'capacidad_amb' : self.capacidad_amb
         }
     

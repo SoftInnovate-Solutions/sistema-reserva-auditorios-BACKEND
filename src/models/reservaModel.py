@@ -204,3 +204,20 @@ class ReservaModel():
             return affected_row
         except Exception as ex:
             raise Exception(ex)
+        
+    @classmethod
+    def update_cantidad(self, cod_imparticion, cantidad_estudiantes):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                            UPDATE 
+                                ''', (
+                                    cod_imparticion, cantidad_estudiantes
+                            ))
+                affected_row = cursor.rowcount
+                connection.commit()
+            connection.close()
+            return affected_row
+        except Exception as ex:
+            raise Exception(ex)
