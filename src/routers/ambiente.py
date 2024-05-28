@@ -41,6 +41,8 @@ def add_ambiente():
         capacidad_amb = request.json['capacidad_amb']
         ubicacion_amb = request.json['ubicacion_amb']
         descripcion_amb = request.json['descripcion_amb']
+        albergacion_max_amb = request.json['albergacion_max_amb']
+        albergacion_min_amb = request.json['albergacion_min_amb']
         cod_estado_ambiente = request.json['cod_estado_ambiente']
         cod_piso = request.json['cod_piso']
         cod_edificacion = request.json['cod_edificacion']
@@ -49,7 +51,8 @@ def add_ambiente():
         ambiente = Ambiente(nombre_amb=str(nombre_amb), capacidad_amb=int(capacidad_amb),ubicacion_amb= str(ubicacion_amb),
                             descripcion_amb= str(descripcion_amb),cod_estado_ambiente=int(cod_estado_ambiente), 
                             cod_piso= int(cod_piso), cod_edificacion = int(cod_edificacion),
-                            cod_facultad= int(cod_facultad), cod_tipo_ambiente = int(cod_tipo_ambiente))
+                            cod_facultad= int(cod_facultad), cod_tipo_ambiente = int(cod_tipo_ambiente), 
+                            albergacion_min_amb=albergacion_min_amb, albergacion_max_amb=albergacion_max_amb)
         affected_rows = AmbienteModel.add_ambiente(ambiente)
         if affected_rows == 1:
             return jsonify(affected_rows)

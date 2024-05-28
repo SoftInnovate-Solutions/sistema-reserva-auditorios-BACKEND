@@ -32,8 +32,9 @@ class Reserva():
             'numero_estudiantes' : numero_estudiantes
         }
     
-    def to_JSONIMPARTICION(self, imparticion,cantidad_estudiantes_imp):
+    def to_JSONIMPARTICION(self, imparticion,cantidad_estudiantes_imp,cod_imparticion):
         return{
+            'cod_imparticion' : cod_imparticion,
             'imparticion' : str(imparticion).strip(),
             'cantidad_estudiantes_imp': cantidad_estudiantes_imp,
             'cod_grupo': self.cod_grupo,

@@ -58,9 +58,11 @@ class AmbienteModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    INSERT INTO ambiente (nombre_amb,capacidad_amb,ubicacion_amb,descripcion_amb,albergacion_max_amb,albergacion_min_amb,cod_estado_ambiente,cod_piso,
-                    cod_edificacion,cod_facultad,cod_tipo_ambiente) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', (
-                    ambiente.nombre_amb, ambiente.capacidad_amb, ambiente.ubicacion_amb, ambiente.descripcion_amb, 110, 90,
+                    INSERT INTO 
+                    ambiente (nombre_amb,capacidad_amb,ubicacion_amb,descripcion_amb,albergacion_max_amb,albergacion_min_amb,cod_estado_ambiente,cod_piso,
+                    cod_edificacion,cod_facultad,cod_tipo_ambiente) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)''', (
+                    ambiente.nombre_amb, ambiente.capacidad_amb, ambiente.ubicacion_amb, ambiente.descripcion_amb, ambiente.albergacion_max_amb, ambiente.albergacion_min_amb,
                     int(ambiente.cod_estado_ambiente), int(ambiente.cod_piso), int(ambiente.cod_edificacion), int(ambiente.cod_facultad),
                     int(ambiente.cod_tipo_ambiente)
                 ))
@@ -107,11 +109,11 @@ class AmbienteModel():
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute('SELECT cod_ambiente, albergacion_max_amb, albergacion_min_amb FROM ambiente WHERE cod_ambiente = %s',(id,))
+                cursor.execute('SELECT cod_ambiente, albergacion_max_amb, albergacion_min_amb, capacidad_amb FROM ambiente WHERE cod_ambiente = %s',(id,))
                 row = cursor.fetchone()
                 ambiente = None
                 if row != None:
-                    ambiente = Ambiente(cod_ambiente=row[0],albergacion_max_amb=row[1],albergacion_min_amb=row[2])
+                    ambiente = Ambiente(cod_ambiente=row[0],albergacion_max_amb=row[1],albergacion_min_amb=row[2],capacidad_amb=row[3])
                     ambiente = ambiente.to_JSONSETTING()
                 connection.close()
                 return ambiente

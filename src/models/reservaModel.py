@@ -78,7 +78,7 @@ class ReservaModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                SELECT CONCAT(TRIM(m.nombre_mat),' - ',TRIM(g.nombre_gru)) AS imparticion, cantidad_estudiantes_imp, g.cod_grupo, m.cod_materia
+                SELECT CONCAT(TRIM(m.nombre_mat),' - ',TRIM(g.nombre_gru)) AS imparticion, i.cantidad_estudiantes_imp, g.cod_grupo, m.cod_materia, i.cod_imparticion
                 FROM imparticion AS i
                 JOIN materia AS m ON i.cod_materia = m.cod_materia
                 JOIN grupo AS g ON i.cod_grupo = g.cod_grupo
@@ -89,7 +89,7 @@ class ReservaModel():
             if rows is not None:
                 imparticiones = []
                 for row in rows:
-                    imparticiones.append(Reserva(cod_grupo=row[2], cod_materia=row[3]).to_JSONIMPARTICION(row[0],row[1]))
+                    imparticiones.append(Reserva(cod_grupo=row[2], cod_materia=row[3]).to_JSONIMPARTICION(row[0],row[1],row[4]))
                 return imparticiones
             return {}
             
@@ -107,8 +107,8 @@ class ReservaModel():
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE 
-                %s BETWEEN a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_min_amb::DOUBLE PRECISION / 100) 
-                AND a.capacidad_amb::DOUBLE PRECISION * (a.albergacion_max_amb::DOUBLE PRECISION / 100)
+                %s a.albergacion_min_amb
+                AND a.albergacion_max_amb
                 EXCEPT
                 SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
                 FROM reserva;
