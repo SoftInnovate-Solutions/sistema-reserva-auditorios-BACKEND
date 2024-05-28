@@ -107,7 +107,7 @@ class ReservaModel():
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE 
-                %s a.albergacion_min_amb
+                %s BETWEEN a.albergacion_min_amb
                 AND a.albergacion_max_amb
                 EXCEPT
                 SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
