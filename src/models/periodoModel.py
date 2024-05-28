@@ -108,14 +108,14 @@ class PeriodoModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    SELECT cod_periodo_reserva, fecha_inicio_docente_per, fecha_fin_docente_per
+                    SELECT COUNT(cod_periodo_reserva)
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_docente_per AND fecha_fin_docente_per
                     LIMIT 1;
                 ''')
                 result = cursor.fetchone()
             if result is not None:
-                return {'existe' : result[0]}
+                return {'existe' : result[0], 'rol' : 1}
             connection.close()
             return {'existe' : 0}
         except Exception as ex:
@@ -127,14 +127,14 @@ class PeriodoModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    SELECT cod_periodo_reserva, fecha_inicio_auxiliar_per, fecha_fin_auxiliar_per
+                    SELECT COUNT(cod_periodo_reserva)
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE AND CURRENT_DATE BETWEEN fecha_inicio_auxiliar_per AND fecha_fin_auxiliar_per
                     LIMIT 1;
                 ''')
                 result = cursor.fetchone()
             if result is not None:
-                return {'existe' : result[0]}
+                return {'existe' : result[0], 'rol' : 2}
             connection.close()
             return {'existe' : 0}
         except Exception as ex:

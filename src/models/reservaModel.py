@@ -187,16 +187,16 @@ class ReservaModel():
             raise Exception(ex)
     
     @classmethod
-    def add_reserva(self,cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res):
+    def add_reserva(self,cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res, cantidad_estudiantes_res, cantidad_estudiantes_res_total):
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
                             INSERT INTO 
-                            reserva ( cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res )
-                            VALUES (%s,%s,%s,%s,%s,%s,%s);
+                            reserva ( cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res , cantidad_estudiantes_res, cantidad_estudiantes_res_total)
+                            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);
                                 ''', (
-                                    cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res
+                                    cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res, cantidad_estudiantes_res, cantidad_estudiantes_res_total
                             ))
                 affected_row = cursor.rowcount
                 connection.commit()
@@ -205,19 +205,3 @@ class ReservaModel():
         except Exception as ex:
             raise Exception(ex)
         
-    @classmethod
-    def update_cantidad(self, cod_imparticion, cantidad_estudiantes):
-        try:
-            connection = get_connection()
-            with connection.cursor() as cursor:
-                cursor.execute('''
-                            UPDATE 
-                                ''', (
-                                    cod_imparticion, cantidad_estudiantes
-                            ))
-                affected_row = cursor.rowcount
-                connection.commit()
-            connection.close()
-            return affected_row
-        except Exception as ex:
-            raise Exception(ex)

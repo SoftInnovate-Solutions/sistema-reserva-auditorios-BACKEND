@@ -74,6 +74,8 @@ def add_reserva():
         cod_dia = request.json['cod_dia']
         cod_bloque = request.json['cod_bloque']
         fecha_res = request.json['fecha_res']
-        return jsonify(ReservaModel.add_reserva(cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res))
+        cantidad_estudiantes_res = request.json['cantidad_estudiantes_res']
+        cantidad_estudiantes_res_total = request.json['cantidad_estudiantes_res_total']
+        return jsonify(ReservaModel.add_reserva(cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res, cantidad_estudiantes_res, cantidad_estudiantes_res_total))
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500

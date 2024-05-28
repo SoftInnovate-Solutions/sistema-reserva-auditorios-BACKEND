@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     26/05/2024 11:11:22                          */
+/* Created on:     28/05/2024 18:14:26                          */
 /*==============================================================*/
 
 
@@ -597,6 +597,8 @@ create table RESERVA (
    COD_MATERIA          INT4                 not null,
    COD_RESERVA          SERIAL               not null,
    FECHA_RES            DATE                 not null,
+   CANTIDAD_ESTUDIANTES_RES INT4                 not null,
+   CANTIDAD_ESTUDIANTES_TOTAL_RES INT4                 not null,
    constraint PK_RESERVA primary key (COD_USUARIO, COD_DIA, COD_BLOQUE, COD_AMBIENTE, COD_GRUPO, COD_MATERIA, COD_RESERVA)
 );
 
@@ -859,6 +861,4 @@ alter table USUARIO
    add constraint FK_USUARIO_ES5_ADMINIST foreign key (ADM_COD_USUARIO)
       references ADMINISTRADOR (COD_USUARIO)
       on delete restrict on update restrict;
-
-
 
