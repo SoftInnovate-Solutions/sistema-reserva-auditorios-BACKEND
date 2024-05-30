@@ -3,7 +3,7 @@ class Periodo_Reserva():
                  fecha_fin_docente_per = None, fecha_inicio_docente_per = None, 
                  fecha_fin_general_per = None, fecha_inicio_auxiliar_per = None, fecha_fin_auxiliar_per = None,
                  notificacion_per = None, estado_visualizacion_per = None):
-        self.cod_periodo_reserva = cod_periodo_reserva
+        self.cod_periodo_reserva = int(cod_periodo_reserva)
         self.fecha_inicio_general_per = fecha_inicio_general_per
         self.fecha_fin_general_per = fecha_fin_general_per
         self.fecha_inicio_docente_per = fecha_inicio_docente_per

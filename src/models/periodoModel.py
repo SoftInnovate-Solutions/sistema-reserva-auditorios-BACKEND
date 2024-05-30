@@ -145,7 +145,7 @@ class PeriodoModel():
         try:
             connection = get_connection()
             with connection.cursor() as cursor:
-                cursor.execute('DELETE FROM periodo_reserva WHERE cod_periodo_reserva = %s',(periodo_reserva.cod_periodo_reserva))
+                cursor.execute('DELETE FROM periodo_reserva WHERE cod_periodo_reserva = %s',(periodo_reserva.cod_periodo_reserva,))
                 affected_rows_periodo = cursor.rowcount
                 cursor.execute('DELETE FROM ajuste_ambiente;')
                 affected_rows_detalle_periodo = cursor.rowcount
