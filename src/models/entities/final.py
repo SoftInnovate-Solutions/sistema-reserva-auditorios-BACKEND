@@ -19,5 +19,6 @@ class Final(Usuario):
         return{
             "cod_usuario" : self.cod_usuario,
             "nombre_usu" : str(self.nombre_usu).strip(),
-            "codigo_sis_fin" : str(self.codigo_sis_fin).strip()
+            "codigo_sis_fin" : str(self.codigo_sis_fin).strip(),
+            "cod_tipo_final" : self.cod_tipo_final
         }
