@@ -19,14 +19,15 @@ class FinalModel():
                 result1 = cursor.fetchone()
                 if result1 is not None:
                     cursor.execute('''
-                               SELECT cod_usuario
-                               FROM final
-                               WHERE cod_usuario = %s AND codigo_sis_fin = %s;
+                            SELECT f.cod_usuario, tf.nombre_tf
+                            FROM final AS f
+                            JOIN tipo_final AS tf ON tf.cod_tipo_final = f.cod_tipo_final
+                            WHERE f.cod_usuario = %s AND f.codigo_sis_fin = %s;
                         ''',(result1[0],codigo_sis))
                     result2 = cursor.fetchone()
                     if result2 is not None:
                         connection.close()
-                        return Final(cod_usuario = result2[0], nombre_usu = result1[1], codigo_sis_fin = codigo_sis).to_JSONVALIDO()
+                        return Final(cod_usuario = result2[0],cod_tipo_final = str(result2[1]).strip(), nombre_usu = result1[1], codigo_sis_fin = codigo_sis).to_JSONVALIDO()
             connection.close()
             return {}
         except Exception as ex:
