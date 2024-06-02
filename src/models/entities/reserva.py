@@ -60,5 +60,24 @@ class Reserva():
             'cod_dia': self.cod_dia
         }
 
-
+    def to_JSONHISTORIALALL(self):
+        return {
+            'cod_reserva' : self.cod_reserva,
+            'nombre_ambiente' : str(self.cod_ambiente).strip(),
+            'hora_bloque' : str(self.cod_bloque).strip(),
+            'fecha_res' : self.fecha_res
+        }
+    
+    def to_JSONHISTORYONE(self, codigo_sis, nombre_usuario, nombre_ambiente, lugar, facultad):
+        return {
+            'codigo_sis' : codigo_sis,
+            'nombre_usuario' : nombre_usuario,
+            'nombre_ambiente' : nombre_ambiente,
+            'lugar' : lugar,
+            'facultad' : facultad,
+            'fecha_res' : self.fecha_res,
+            'hora_bloque' : str(self.cod_bloque).strip()
+        }
+        
+    
 

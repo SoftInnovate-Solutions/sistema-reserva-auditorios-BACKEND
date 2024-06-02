@@ -19,7 +19,7 @@ def delete_reserva(id):
         affected_rows = ReservaModel.delete_reserva(reserva)
         if affected_rows == 1:
             return jsonify(reserva.cod_reserva)
-        return jsonify({'message': "Ambiente no eliminado"}), 404
+        return jsonify({'message': "Reserva no eliminado"}), 404
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
 
@@ -79,3 +79,20 @@ def add_reserva():
         return jsonify(ReservaModel.add_reserva(cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res, cantidad_estudiantes_res, cantidad_estudiantes_res_total))
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+
+@main.route('/get_history_all')
+def get_history_all():
+    try:
+        history = ReservaModel.get_history_all()
+        return jsonify(history)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
+    
+@main.route('/get_history_one/<id>')
+def get_history_one(id):
+    try:
+        historia = ReservaModel.get_history_one(id)
+        return jsonify(historia)
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500
+    

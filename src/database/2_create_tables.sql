@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     28/05/2024 18:14:26                          */
+/* Created on:     01/06/2024 22:39:52                          */
 /*==============================================================*/
 
 
@@ -325,7 +325,7 @@ COD_DIA
 /*==============================================================*/
 create table EDIFICACION (
    COD_EDIFICACION      SERIAL               not null,
-   NOMBRE_EDI           CHAR(20)             not null,
+   NOMBRE_EDI           CHAR(80)             not null,
    constraint PK_EDIFICACION primary key (COD_EDIFICACION)
 );
 
@@ -357,7 +357,7 @@ COD_ESTADO_AMBIENTE
 /*==============================================================*/
 create table FACULTAD (
    COD_FACULTAD         SERIAL               not null,
-   NOMBRE_FAC           CHAR(50)             not null,
+   NOMBRE_FAC           CHAR(80)             not null,
    constraint PK_FACULTAD primary key (COD_FACULTAD)
 );
 
@@ -861,4 +861,7 @@ alter table USUARIO
    add constraint FK_USUARIO_ES5_ADMINIST foreign key (ADM_COD_USUARIO)
       references ADMINISTRADOR (COD_USUARIO)
       on delete restrict on update restrict;
+
+
+
 

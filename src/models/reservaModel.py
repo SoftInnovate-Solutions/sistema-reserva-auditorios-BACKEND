@@ -106,9 +106,7 @@ class ReservaModel():
                 aa.cod_ambiente,aa.cod_dia,aa.cod_bloque,aa.fecha_aa,a.nombre_amb
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
-                WHERE 
-                %s BETWEEN a.albergacion_min_amb
-                AND a.albergacion_max_amb
+                WHERE %s BETWEEN a.albergacion_min_amb AND a.albergacion_max_amb AND a.cod_estado_ambiente = 1
                 EXCEPT
                 SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
                 FROM reserva;
@@ -205,3 +203,50 @@ class ReservaModel():
         except Exception as ex:
             raise Exception(ex)
         
+    @classmethod    
+    def get_history_all(self):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                SELECT r.cod_reserva, a.nombre_amb, CONCAT(b.hora_inicio_blo,' - ',b.hora_fin_blo), r.fecha_res
+                FROM reserva AS r
+                JOIN bloque AS b ON r.cod_bloque = b.cod_bloque
+                JOIN ambiente AS a ON r.cod_ambiente = a.cod_ambiente
+                ORDER BY fecha_res DESC, b.hora_inicio_blo ASC;
+                                ''')
+                rows = cursor.fetchall()
+            connection.close()
+            if rows is not None:
+                conjuntos = []
+                for row in rows:
+                    conjuntos.append(Reserva(cod_dia=row[0],cod_ambiente=row[1],cod_bloque=row[2],fecha_res=row[3]).to_JSONDIABLOQUE())
+                return conjuntos
+            return {}
+            
+        except Exception as ex:
+            raise Exception(ex)
+        
+    @classmethod    
+    def get_history_one(self,cod_reserva):
+        try:
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                        SELECT f.codigo_sis_fin, u.nombre_usu, a.nombre_amb, e.nombre_edi, fa.nombre_fac, r.fecha_res, 
+                        CONCAT(b.hora_inicio_blo,' - ',b.hora_fin_blo) AS horario
+                        FROM reserva AS r
+                        JOIN usuario AS u ON r.cod_usuario = u.cod_usuario
+                        JOIN final AS f ON u.cod_usuario = f.cod_usuario
+                        JOIN ambiente AS a ON r.cod_ambiente = a.cod_ambiente
+                        JOIN edificacion AS e ON a.cod_edificacion = e.cod_edificacion
+                        JOIN facultad AS fa ON a.cod_facultad = fa.cod_facultad
+                        JOIN bloque AS b ON r.cod_bloque = b.cod_bloque
+                        WHERE cod_reserva = %s;
+                                ''',(cod_reserva,))
+                row = cursor.fetchone()
+            connection.close()
+            return Reserva(fecha_res=row[5],cod_bloque=row[6]).to_JSONHISTORYONE(row[0],row[1],row[2],row[3],row[4])
+            
+        except Exception as ex:
+            raise Exception(ex)

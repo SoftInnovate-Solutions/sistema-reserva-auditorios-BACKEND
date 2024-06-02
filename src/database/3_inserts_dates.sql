@@ -18,19 +18,68 @@ VALUES
 /*Edificio*/
 INSERT INTO EDIFICACION (NOMBRE_EDI)
 VALUES 
-    ('Edificio A'),
-    ('Edificio B'),
-    ('Edificio C'),
-    ('Edificio D');
+    ('Bloque Central'),
+    ('Sala Docentes'),
+    ('Departamento de Fisica'),
+    ('Centro de Aguas y Saneamiento Ambiental CASA'),
+    ('Centro de alimentos y Productos Ambiental CAPN'),
+    ('Departamaneto de Quimica'),
+    ('Centros CTA'),
+    ('CEB'),
+    ('CEF'),
+    ('CEIC'),
+    ('Gabinete Fisica CE.Fis'),
+    ('CEQA'),
+    ('Depatamento de Biologia'),
+    ('Elektro'),
+    ('Simulacion Metodos y Seguridad'),
+    ('CEMAT'),
+    ('Palacio de la Ciencia y Cultura'),
+    ('Area Abierta de Estudio 1'),
+    ('Area Abierta de Estudio 2'),
+    ('Planta de tratamiento de Agua'),
+    ('Planta de alimentos'),
+    ('Planta Agroquimico'),
+    ('Planta de Biogas'),
+    ('Laboratorio de Materiales'),
+    ('CAD-CAM'),
+    ('Automatizacion y Control Planta de Bioprocesos'),
+    ('Parqueo Facultativo'),
+    ('Dep. Industrial, CEB'),
+    ('CEInf.'),
+    ('Planta de Amoniaco'),
+    ('CESA'),
+    ('Academico 2'),
+    ('Sala de Estudios de Ing. Civil'),
+    ('Planta de Procesos Industriales'),
+    ('Memi'),
+    ('Posgrado FCyT'),
+    ('Dep. Informatica y Sistema'),
+    ('Sub. Estacion de Potencia'),
+    ('Dep. Mantenimiento'),
+    ('Dep. Infraestructura');
+    
 
 
 /*Facultad*/
 INSERT INTO FACULTAD (NOMBRE_FAC)
 VALUES 
-    ('Facultad de Ciencias'),
-    ('Facultad de Ingeniería'),
-    ('Facultad de Artes'),
-    ('Facultad de Derecho');
+    ('Facultad de Ciencias Económicas'),
+    ('Facultad de Ciencias y Tecnología'),
+    ('Facultad de Humanidades y Ciencias de la Educación'),
+    ('Facultad de Ciencias Jurídicas y Políticas'),
+    ('Facultad de Arquitectura y Ciencias del Hábitat'),
+    ('Facultad de Ciencias Agrícolas y Pecuarias'),
+    ('Facultad de Medicina'),
+    ('Facultad de Odontología'),
+    ('Facultad de Ciencias Bioquímicas y Farmacéuticas'),
+    ('Facultad Politécnica del Valle Alto'),
+    ('Facultad de Ciencias Sociales'),
+    ('Facultad de Desarrollo Rural y Territorial'),
+    ('Escuela Forestal'),
+    ('Facultad de Enfermería'),
+    ('Unidad Desconcentrada del Valle de Sacta'),
+    ('Facultad de Ciencias Veterinarias');
 
 /*Tipo ambiente*/
 INSERT INTO TIPO_AMBIENTE (NOMBRE_TA)
