@@ -100,6 +100,7 @@ Paso 5
   "cod_bloque": 3,
   "fecha_res": "2024-07-01"
 }
-
+* ruta: ``http://127.0.0.1:5000/get_history_all``, obtienes todas las reservas realizadas
+* ruta: ``http://127.0.0.1:5000/get_history_one/<id>``, obtienes la informacion de la reserva realizada
 
 
