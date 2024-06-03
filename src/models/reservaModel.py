@@ -191,7 +191,7 @@ class ReservaModel():
             with connection.cursor() as cursor:
                 cursor.execute('''
                             INSERT INTO 
-                            reserva ( cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res , cantidad_estudiantes_res, cantidad_estudiantes_res_total)
+                            reserva ( cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res , cantidad_estudiantes_res, cantidad_estudiantes_total_res)
                             VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s);
                                 ''', (
                                     cod_usuario, cod_grupo, cod_materia, cod_ambiente, cod_dia, cod_bloque, fecha_res, cantidad_estudiantes_res, cantidad_estudiantes_res_total
