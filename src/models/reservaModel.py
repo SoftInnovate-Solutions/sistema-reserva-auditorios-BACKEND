@@ -220,7 +220,7 @@ class ReservaModel():
             if rows is not None:
                 conjuntos = []
                 for row in rows:
-                    conjuntos.append(Reserva(cod_dia=row[0],cod_ambiente=row[1],cod_bloque=row[2],fecha_res=row[3]).to_JSONDIABLOQUE())
+                    conjuntos.append(Reserva(cod_reserva=row[0],cod_ambiente=row[1],cod_bloque=row[2],fecha_res=row[3]).to_JSONHISTORIALALL())
                 return conjuntos
             return {}
             

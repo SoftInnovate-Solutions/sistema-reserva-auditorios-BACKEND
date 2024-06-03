@@ -82,7 +82,9 @@ def add_reserva():
 
 @main.route('/get_history_all')
 def get_history_all():
+    print("aa")
     try:
+        print("aa")
         history = ReservaModel.get_history_all()
         return jsonify(history)
     except Exception as ex:
