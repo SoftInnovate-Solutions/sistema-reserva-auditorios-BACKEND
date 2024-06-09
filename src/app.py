@@ -4,7 +4,7 @@ from flask import Flask
 from flask_cors import CORS
 from config import config
 from utils.temporizador import Temporizador
-from routers import ambiente, edificacion, facultad, piso, tipo_ambiente, estado_ambiente, bloque, ajuste_ambiente, periodo, final, administrador,reserva
+from routers import ambiente, edificacion, facultad, piso, tipo_ambiente, estado_ambiente, bloque, ajuste_ambiente, periodo, final, administrador,reserva,dashboard
 
 app = Flask(__name__)
 CORS(app, resources={'*': {'origin': 'http//localhost:5173'}})
@@ -26,6 +26,7 @@ def run_flask_app():
     app.register_blueprint(final.main, url_prefix='/final')
     app.register_blueprint(administrador.main, url_prefix='/administrador')
     app.register_blueprint(reserva.main, url_prefix='/reserva')
+    app.register_blueprint(dashboard.main, url_prefix='/dashboard')
     app.register_error_handler(404, page_not_found)
     app.run()
 
