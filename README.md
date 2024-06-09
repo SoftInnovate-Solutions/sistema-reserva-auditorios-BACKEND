@@ -102,6 +102,7 @@ Paso 5
 }
 * ruta: ``http://127.0.0.1:5000/reserva/get_history_all``, obtienes todas las reservas realizadas
 * ruta: ``http://127.0.0.1:5000/reserva/get_history_one/<id>``, obtienes la informacion de la reserva realizada
+
 * ruta: ``http://127.0.0.1:5000/dashboard/reporte_ambientes``, obtienes todos los reportes de los ambientes
 {
   "fecha_inicio" : YYYY-MM-DD,
