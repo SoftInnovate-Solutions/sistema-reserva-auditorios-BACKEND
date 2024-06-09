@@ -169,7 +169,7 @@ class ReservaModel():
                 JOIN bloque AS b ON b.cod_bloque = aa.cod_bloque
                 WHERE aa.cod_ambiente = %s AND aa.fecha_aa = %s
                 EXCEPT
-                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res,blo.nombre_blo, bb.hora_inicio_blo,bb.hora_fin_blo
+                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res,blo.nombre_blo, blo.hora_inicio_blo,blo.hora_fin_blo
                 FROM reserva AS r
                 JOIN bloque AS blo ON blo.cod_bloque = r.cod_bloque
                 ) AS subconsulta_externa
