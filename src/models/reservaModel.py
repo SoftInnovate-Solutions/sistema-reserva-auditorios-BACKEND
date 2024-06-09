@@ -102,8 +102,8 @@ class ReservaModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                SELECT DISTINCT ON (aa.cod_ambiente) 
-                aa.cod_ambiente,aa.cod_dia,aa.cod_bloque,aa.fecha_aa,a.nombre_amb
+                SELECT DISTINCT ON (a.nombre_amb) 
+                aa.cod_ambiente, aa.cod_dia,aa.cod_bloque, aa.fecha_aa,a.nombre_amb
                 FROM ajuste_ambiente AS aa
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE %s BETWEEN a.albergacion_min_amb AND a.albergacion_max_amb AND a.cod_estado_ambiente = 1
