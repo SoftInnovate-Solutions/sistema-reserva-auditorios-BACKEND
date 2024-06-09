@@ -108,8 +108,9 @@ class ReservaModel():
                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                 WHERE %s BETWEEN a.albergacion_min_amb AND a.albergacion_max_amb AND a.cod_estado_ambiente = 1
                 EXCEPT
-                SELECT cod_ambiente, cod_dia, cod_bloque, fecha_res, '' 
-                FROM reserva;
+                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, amb.nombre_amb 
+                FROM reserva AS r
+                JOIN ambiente AS amb ON amb.cod_ambiente = r.cod_ambiente;
                                 ''',(cantidad,))
                 rows = cursor.fetchall()
             connection.close()
@@ -129,18 +130,18 @@ class ReservaModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                                SELECT cod_ambiente, cod_dia, cod_bloque, fecha_aa, nombre_amb
+                                SELECT cod_dia, cod_bloque,  CONCAT(nombre_blo,': ', hora_inicio_blo,' - ',hora_fin_blo) AS nombre
                                 FROM (
-                                SELECT DISTINCT ON (aa.fecha_aa) 
-                                aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, a.nombre_amb
+                                SELECT aa.cod_ambiente, aa.cod_dia, aa.cod_bloque, aa.fecha_aa, b.nombre_blo, b.hora_inicio_blo,b.hora_fin_blo
                                 FROM ajuste_ambiente AS aa
-                                JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
-                                WHERE aa.cod_ambiente = %s
+                                JOIN bloque AS b ON b.cod_bloque = aa.cod_bloque
+                                WHERE aa.cod_ambiente = %s AND aa.fecha_aa = %s
                                 EXCEPT
-                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, '' 
+                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res,blo.nombre_blo, bb.hora_inicio_blo,bb.hora_fin_blo
                                 FROM reserva AS r
+                                JOIN bloque AS blo ON blo.cod_bloque = r.cod_bloque
                                 ) AS subconsulta_externa
-                                ORDER BY fecha_aa;
+                                ORDER BY nombre_blo;
                                 ''',(id,))
                 rows = cursor.fetchall()
             connection.close()
