@@ -137,10 +137,6 @@ class ReservaModel():
                                 FROM ajuste_ambiente AS aa
                                 JOIN ambiente AS a ON a.cod_ambiente = aa.cod_ambiente
                                 WHERE aa.cod_ambiente = %s
-                                EXCEPT
-                                SELECT r.cod_ambiente, r.cod_dia, r.cod_bloque, r.fecha_res, amb.nombre_amb 
-                                FROM reserva AS r
-                                JOIN ambiente AS amb ON amb.cod_ambiente = r.cod_ambiente
                                 ) AS subconsulta_externa
                                 ORDER BY fecha_aa;
                                 ''',(id,))
