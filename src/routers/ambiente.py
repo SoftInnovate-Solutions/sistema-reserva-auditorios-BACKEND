@@ -13,6 +13,15 @@ def get_ambientes_all():
     except Exception as ex:
         return jsonify({'message':str(ex)}),500
 
+@main.route('/imparticion/all')
+def get_imparticion_all():
+    try:
+        imparticion = AmbienteModel.get_imparticion_all()
+        return jsonify(imparticion)
+    except Exception as ex:
+        return jsonify({'message':str(ex)}),500
+
+
 @main.route('/one/<id>')
 def get_ambiente_one(id):
     try:

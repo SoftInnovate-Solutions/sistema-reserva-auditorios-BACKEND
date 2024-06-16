@@ -12,3 +12,4 @@ def iniciar_sesion():
         return jsonify(usuario_final)
     except Exception as ex:
         return jsonify({'message': str(ex)}), 500
+

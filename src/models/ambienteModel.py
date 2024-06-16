@@ -3,6 +3,8 @@ from .entities.ambiente import Ambiente
 from utils.transformacion import Transformacion
 from utils.generador import Generador
 
+from .entities.imparticion import Imparticion
+
 class AmbienteModel():
     @classmethod
     def get_ambientes_all(self):
@@ -19,6 +21,29 @@ class AmbienteModel():
         except Exception as ex:
             raise Exception(ex)
     
+    @classmethod
+    def get_imparticion_all(cls):
+        try:
+            connection = get_connection()
+            imparticion = []
+            with connection.cursor() as cursor:
+                cursor.execute('''
+                    SELECT 
+                        u.NOMBRE_USU AS nombreUsuario, m.NOMBRE_MAT AS materia, 
+                        g.NOMBRE_GRU AS grupo, i.CANTIDAD_ESTUDIANTES_IMP AS cantidad_estudiantes
+                    FROM imparticion i
+                    JOIN usuario u ON i.COD_USUARIO = u.COD_USUARIO
+                    JOIN materia m ON i.COD_MATERIA = m.COD_MATERIA
+                    JOIN grupo g ON i.COD_GRUPO = g.COD_GRUPO;
+                ''')
+                resultset = cursor.fetchall()
+                for row in resultset:
+                    imparticion.append(Imparticion(row[0], row[1], row[2], row[3]).to_JSONALL())
+            connection.close()
+            return imparticion
+        except Exception as ex:
+            raise Exception(ex)
+        
     @classmethod
     def get_ambientes_filter(self,filtro):
         pFiltro = Transformacion.convertirTuplaFiltraddor(filtro)
