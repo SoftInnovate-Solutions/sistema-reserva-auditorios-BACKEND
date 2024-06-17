@@ -12,10 +12,10 @@ class AmbienteModel():
             connection = get_connection()
             ambientes = []
             with connection.cursor() as cursor:
-                cursor.execute('SELECT a.cod_ambiente, a.nombre_amb, e.nombre_ea, a.capacidad_amb From ambiente a JOIN estado_ambiente e ON a.cod_estado_ambiente = e.cod_estado_ambiente;')
+                cursor.execute('SELECT a.cod_ambiente, a.nombre_amb, e.nombre_ea,a.albergacion_min_amb, a.capacidad_amb, a.albergacion_max_amb From ambiente a JOIN estado_ambiente e ON a.cod_estado_ambiente = e.cod_estado_ambiente;')
                 resultset = cursor.fetchall()
                 for row in resultset:
-                    ambientes.append(Ambiente(cod_ambiente=row[0],nombre_amb=row[1],cod_estado_ambiente=row[2],capacidad_amb=row[3]).to_JSONALL())
+                    ambientes.append(Ambiente(cod_ambiente=row[0],nombre_amb=row[1],cod_estado_ambiente=row[2],albergacion_min_amb=row[3],capacidad_amb=row[4],albergacion_max_amb=row[5]).to_JSONALL())
             connection.close()
             return ambientes
         except Exception as ex:

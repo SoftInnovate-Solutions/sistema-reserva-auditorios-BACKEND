@@ -32,7 +32,9 @@ class Ambiente():
             'cod_ambiente' : self.cod_ambiente,
             'nombre_amb' : str(self.nombre_amb).strip(),
             'estado_ambiente' : str(self.cod_estado_ambiente).strip(),
-            'capacidad_amb' : self.capacidad_amb
+            'capacidad_min_amb' : self.albergacion_min_amb,
+            'capacidad_amb' : self.capacidad_amb,
+            'capacidad_max_amb' : self.albergacion_max_amb
         }
     
     def to_JSONSETTING(self):
