@@ -30,7 +30,11 @@ class Periodo_Reserva():
         return{
             'cod_periodo_reserva' : self.cod_periodo_reserva,
             'fecha_inicio_general_per': str(self.fecha_inicio_general_per),
-            'fecha_fin_general_per': str(self.fecha_fin_general_per)
+            'fecha_fin_general_per': str(self.fecha_fin_general_per),
+            'fecha_inicio_docente_per': str(self.fecha_inicio_docente_per),
+            'fecha_fin_docente_per': str(self.fecha_fin_docente_per),
+            'fecha_inicio_auxiliar_per': str(self.fecha_inicio_auxiliar_per),
+            'fecha_fin_auxiliar_per': str(self.fecha_fin_auxiliar_per),
         }
 
     

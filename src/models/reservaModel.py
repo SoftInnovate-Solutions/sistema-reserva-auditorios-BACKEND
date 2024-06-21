@@ -58,10 +58,10 @@ class ReservaModel():
                 if row is not None:
 
                     cursor.execute('''
-                                SELECT cantidad_estudiantes_imp
-                                FROM imparticion
-                                WHERE cod_grupo = %s AND cod_materia = %s AND cod_materia = %s;
-                                ''',(row[7],row[8],row[9]))
+                                SELECT cantidad_estudiantes_total_res
+                                FROM reserva
+                                WHERE cod_grupo = %s AND cod_materia = %s AND cod_usuario = %s AND cod_reserva = %s;
+                                ''',(row[7],row[8],row[9], id))
                     cantidad = cursor.fetchone()
 
             connection.close()

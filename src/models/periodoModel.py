@@ -89,14 +89,18 @@ class PeriodoModel():
             connection = get_connection()
             with connection.cursor() as cursor:
                 cursor.execute('''
-                    SELECT cod_periodo_reserva, fecha_inicio_general_per, fecha_fin_general_per
+                    SELECT cod_periodo_reserva, fecha_inicio_general_per, fecha_fin_general_per, fecha_inicio_docente_per, fecha_fin_docente_per,
+                    fecha_inicio_auxiliar_per, fecha_fin_auxiliar_per
                     FROM periodo_reserva
                     WHERE estado_visualizacion_per = TRUE
+                    ORDER BY cod_periodo_reserva DESC
                     LIMIT 1;
+
                 ''')
                 result = cursor.fetchone()
             if result is not None:
-                return Periodo_Reserva(cod_periodo_reserva = result[0],fecha_inicio_general_per = result[1],fecha_fin_general_per = result[2]).to_JSONGENERAL()
+                return Periodo_Reserva(cod_periodo_reserva = result[0],fecha_inicio_general_per = result[1],fecha_fin_general_per = result[2],fecha_inicio_docente_per = result[3], fecha_fin_docente_per = result[4]
+                                       ,fecha_inicio_auxiliar_per = result[5], fecha_fin_auxiliar_per = result[6]).to_JSONGENERAL()
             connection.close()
             return {}
         except Exception as ex:
